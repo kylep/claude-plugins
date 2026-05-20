@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "pai-plugins",
+  "description": "Pericak AI — Kyle Pericak's public plugin marketplace for Claude Code",
+  "owner": {
+    "name": "Kyle Pericak",
+    "email": "kyle@pericak.com"
+  },
+  "plugins": [
+    {
+      "name": "pai-workflows",
+      "source": "./plugins/pai-workflows",
+      "description": "Interview-driven PRDs and design docs, research synthesis, grounded retrieval answers, and pre-publish content audits",
+      "version": "0.1.0",
+      "author": {
+        "name": "Kyle Pericak",
+        "email": "kyle@pericak.com",
+        "url": "https://kyle.pericak.com"
+      },
+      "keywords": [
+        "prd",
+        "design-doc",
+        "research",
+        "synthesis",
+        "interview",
+        "workflow"
+      ],
+      "category": "workflow"
+    },
+    {
+      "name": "pai-tools",
+      "source": "./plugins/pai-tools",
+      "description": "SDK-wrapper skills bundled with Python scripts: OpenRouter usage, Google News, Bitwarden CLI, macOS desktop control",
+      "version": "0.1.0",
+      "author": {
+        "name": "Kyle Pericak",
+        "email": "kyle@pericak.com",
+        "url": "https://kyle.pericak.com"
+      },
+      "keywords": [
+        "openrouter",
+        "google-news",
+        "bitwarden",
+        "macos",
+        "screenshot",
+        "sdk-wrapper"
+      ],
+      "category": "tools"
+    }
+  ]
+}

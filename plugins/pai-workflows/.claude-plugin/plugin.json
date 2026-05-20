@@ -1,0 +1,22 @@
+{
+  "name": "pai-workflows",
+  "description": "Interview-driven PRDs and design docs, research synthesis, grounded retrieval answers, and pre-publish content audits. Workflow skills extracted from kyle.pericak.com's blog agent system.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Kyle Pericak",
+    "email": "kyle@pericak.com",
+    "url": "https://kyle.pericak.com"
+  },
+  "homepage": "https://github.com/kylep/claude-plugins/tree/main/plugins/pai-workflows",
+  "repository": "https://github.com/kylep/claude-plugins",
+  "license": "MIT",
+  "keywords": [
+    "prd",
+    "design-doc",
+    "research",
+    "synthesis",
+    "interview",
+    "grounded-retrieval",
+    "security-audit"
+  ]
+}
