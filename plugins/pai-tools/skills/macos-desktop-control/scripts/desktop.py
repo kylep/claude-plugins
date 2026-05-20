@@ -35,10 +35,12 @@ def run(*cmd: str) -> None:
             cmd, capture_output=True, text=True, timeout=30
         )
     except FileNotFoundError:
-        sys.exit(
-            f"`{cmd[0]}` not found on PATH. "
-            "Install cliclick with `brew install cliclick`."
-        )
+        if cmd[0] == "cliclick":
+            sys.exit(
+                "`cliclick` not found on PATH. "
+                "Install with `brew install cliclick`."
+            )
+        sys.exit(f"`{cmd[0]}` not found on PATH.")
     except subprocess.TimeoutExpired:
         sys.exit(f"{cmd[0]} timed out after 30s")
     if result.returncode != 0:
