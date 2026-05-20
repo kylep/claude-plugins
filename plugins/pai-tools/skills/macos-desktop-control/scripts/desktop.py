@@ -31,12 +31,16 @@ def require_macos() -> None:
 
 def run(*cmd: str) -> None:
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        result = subprocess.run(
+            cmd, capture_output=True, text=True, timeout=30
+        )
     except FileNotFoundError:
         sys.exit(
             f"`{cmd[0]}` not found on PATH. "
             "Install cliclick with `brew install cliclick`."
         )
+    except subprocess.TimeoutExpired:
+        sys.exit(f"{cmd[0]} timed out after 30s")
     if result.returncode != 0:
         msg = result.stderr.strip() or "(no stderr)"
         sys.exit(f"{cmd[0]} failed: {msg}")
