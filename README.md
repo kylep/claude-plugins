@@ -33,8 +33,9 @@ Refresh with `/plugin marketplace update pai-plugins` after I push changes.
 | Plugin | What it is |
 |---|---|
 | [`pai-workflows`](plugins/pai-workflows) | Interview-driven PRDs and design docs, research synthesis, grounded retrieval, content security audits |
+| [`pai-tools`](plugins/pai-tools) | SDK-wrapper skills with bundled Python scripts: OpenRouter usage, Google News, Bitwarden CLI, macOS desktop control |
 
-More plugins will land here over time. Each is independent — install only the ones you want.
+Each is independent — install only the ones you want. More plugins may land here over time.
 
 ## Repository layout
 
