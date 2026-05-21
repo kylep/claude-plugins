@@ -1,65 +1,59 @@
 # pai-plugins
 
-**Pericak AI** — public marketplace for [Kyle Pericak](https://kyle.pericak.com)'s Claude Code plugins.
-
-These are skills and tools extracted from my private workspace and de-personalized so other people can use them. They reflect how I think more than what your project needs — read the descriptions, install what's useful, ignore the rest.
+Pericak AI — public marketplace of Claude Code plugins by [Kyle Pericak](https://kyle.pericak.com).
 
 ## Install
-
-This marketplace lives in a public GitHub repo. From any Claude Code session:
 
 ```text
 /plugin marketplace add kylep/claude-plugins
 /plugin install pai-workflows@pai-plugins
+/plugin install pai-tools@pai-plugins
 ```
 
-To install from a local clone instead (handy if you want to fork and tweak):
+Refresh after I push: `/plugin marketplace update pai-plugins`.
 
-```bash
-git clone https://github.com/kylep/claude-plugins ~/gh/claude-plugins
+## pai-workflows
+
+- **writing-prds**: interview-driven PRD generation from a vague idea
+- **writing-design-docs**: PRD → architecture doc with dependency-ordered task breakdown
+- **grounded-retrieval-answering**: confidence-tiered answers from repo evidence (auto-interview companion)
+- **gathering-sourced-facts**: structured research brief with sources and confidence levels
+- **synthesizing-research**: compare/contrast multiple research reports into shared/unique/contradiction
+- **ingesting-external-research**: validate claims, ADOPT/ADAPT/SKIP triage with self-review
+- **auditing-for-confidential-data**: pre-publish content audit (auth'd-data leaks, OWASP LLM 01/05/06)
+
+## pai-tools
+
+- **openrouter-usage**: OpenRouter API spend, credit balance, model pricing
+- **google-news**: gnews.io search + headlines with prompt-injection sanitization
+- **bitwarden-vault**: `bw` CLI wrapper — list, get, create, edit, generate
+- **macos-desktop-control**: macOS `screencapture` + `cliclick`
+- **discord**: Discord REST API v10 — send/read/edit/delete messages, reactions, threads, embeds
+- **openobserve**: SQL log queries, error summaries, stream/alert listings
+- **google-search-console**: search analytics, URL inspection, sitemap management (OAuth)
+- **ga4-analytics**: Google Analytics 4 historical and realtime reports (service account)
+- **linear**: Linear GraphQL — list/get/create/update issues, comments, teams, projects
+- **cc-usage**: Claude Code spend and tokens from local session logs, with LiteLLM pricing
+
+## Layout
+
+```
+.claude-plugin/marketplace.json
+plugins/
+├── pai-workflows/
+│   ├── .claude-plugin/plugin.json
+│   ├── README.md
+│   └── skills/<name>/SKILL.md
+└── pai-tools/
+    ├── .claude-plugin/plugin.json
+    ├── README.md
+    └── skills/<name>/
+        ├── SKILL.md
+        └── scripts/<name>.py
 ```
 
-Then in Claude Code:
-
-```text
-/plugin marketplace add ~/gh/claude-plugins
-/plugin install pai-workflows@pai-plugins
-```
-
-Refresh with `/plugin marketplace update pai-plugins` after I push changes.
-
-## Plugins
-
-| Plugin | What it is |
-|---|---|
-| [`pai-workflows`](plugins/pai-workflows) | Interview-driven PRDs and design docs, research synthesis, grounded retrieval, content security audits |
-| [`pai-tools`](plugins/pai-tools) | SDK-wrapper skills with bundled Python scripts: OpenRouter usage, Google News, Bitwarden CLI, macOS desktop control |
-
-Each is independent — install only the ones you want. More plugins may land here over time.
-
-## Repository layout
-
-```
-claude-plugins/
-├── .claude-plugin/
-│   └── marketplace.json            # marketplace catalog
-├── plugins/
-│   └── pai-workflows/               # one plugin per subdirectory
-│       ├── .claude-plugin/
-│       │   └── plugin.json         # plugin manifest
-│       ├── README.md
-│       └── skills/                 # auto-discovered
-│           └── <skill-name>/SKILL.md
-├── LICENSE                          # MIT
-└── README.md
-```
-
-Adding a new plugin is two steps: create `plugins/<new-plugin>/` with a `.claude-plugin/plugin.json` and a `skills/` (and/or `agents/`, `commands/`) directory, then add an entry to `.claude-plugin/marketplace.json` with `"source": "./plugins/<new-plugin>"`.
+New plugins drop into `plugins/<name>/` with their own `.claude-plugin/plugin.json` and `skills/` directory, then get an entry in `.claude-plugin/marketplace.json` with `"source": "./plugins/<name>"`.
 
 ## License
 
 MIT — see [LICENSE](LICENSE).
-
-## Contact
-
-Issues and PRs welcome at <https://github.com/kylep/claude-plugins>. Reach me at <kyle@pericak.com> or via the contact info on [kyle.pericak.com](https://kyle.pericak.com).
