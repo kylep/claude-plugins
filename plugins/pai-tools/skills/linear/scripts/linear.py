@@ -145,6 +145,15 @@ def resolve_project_id(name: str) -> str:
 # ---------------------------------------------------------------------------
 
 
+PRIORITY_NAMES = ("None", "Urgent", "High", "Medium", "Low")
+
+
+def priority_name(value: Any, default: str = "—") -> str:
+    if isinstance(value, int) and 0 <= value < len(PRIORITY_NAMES):
+        return PRIORITY_NAMES[value] if value > 0 else default
+    return default
+
+
 def cmd_list_issues(args: argparse.Namespace) -> None:
     conditions: list[dict] = []
     if args.assignee:
@@ -187,7 +196,7 @@ def cmd_list_issues(args: argparse.Namespace) -> None:
         print("No issues found.")
         return
     for n in nodes:
-        prio = ["—", "Urgent", "High", "Medium", "Low"][n.get("priority", 0)]
+        prio = priority_name(n.get("priority", 0), default="—")
         assignee = (n.get("assignee") or {}).get("displayName") or "—"
         project = (n.get("project") or {}).get("name") or "—"
         print(
@@ -218,7 +227,7 @@ def cmd_get_issue(args: argparse.Namespace) -> None:
     n = data.get("issue")
     if not n:
         sys.exit(f"Issue {args.identifier} not found")
-    prio = ["None", "Urgent", "High", "Medium", "Low"][n.get("priority", 0)]
+    prio = priority_name(n.get("priority", 0), default="None")
     print(f"# {n['identifier']}  {n['title']}")
     print(f"State:    {n['state']['name']}")
     print(f"Priority: {prio}")

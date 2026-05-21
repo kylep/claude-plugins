@@ -65,8 +65,6 @@ def bw(*args: str) -> str:
     if result.returncode != 0:
         msg = result.stderr.strip() or out or "(no output)"
         sys.exit(f"bw error: {msg}")
-    if result.stderr and not out:
-        sys.exit(f"bw error: {result.stderr.strip()}")
     return out
 
 

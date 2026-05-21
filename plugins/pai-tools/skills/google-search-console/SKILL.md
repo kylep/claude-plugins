@@ -18,7 +18,7 @@ Query GSC for search performance, URL inspection, and sitemap management. Wraps 
 
 - You don't own the GSC property — you can only query properties your Google account is verified on.
 - You need real-time data — GSC has a 2-3 day data delay; default `end_date` is 3 days ago for that reason.
-- You want to write/change indexing decisions — GSC is observe-only via API. To request re-indexing, use the GSC web UI.
+- You want to manually request re-indexing of a URL — that's only available in the GSC web UI. (The API does support `submit-sitemap`, which is a write, but no per-URL re-index request.)
 
 ## Setup (one time, but more involved than the other tools)
 
