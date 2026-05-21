@@ -1,0 +1,21 @@
+{
+  "name": "pai-tools",
+  "description": "SDK-wrapper skills: query OpenRouter, Google News, Bitwarden CLI, and macOS desktop from Claude via small Python scripts. Stdlib-only, no build step.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Kyle Pericak",
+    "email": "kyle@pericak.com",
+    "url": "https://kyle.pericak.com"
+  },
+  "homepage": "https://github.com/kylep/claude-plugins/tree/main/plugins/pai-tools",
+  "repository": "https://github.com/kylep/claude-plugins",
+  "license": "MIT",
+  "keywords": [
+    "openrouter",
+    "google-news",
+    "bitwarden",
+    "macos",
+    "screenshot",
+    "sdk-wrapper"
+  ]
+}
