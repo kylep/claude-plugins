@@ -46,6 +46,25 @@
         "sdk-wrapper"
       ],
       "category": "tools"
+    },
+    {
+      "name": "game-dev-tools",
+      "source": "./plugins/game-dev-tools",
+      "description": "Build mods for moddable games. Currently: Stellaris (Paradox / Clausewitz). Codifies the build-from-vanilla / symlink-deploy / preflight pattern from two shipped Workshop mods.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Kyle Pericak",
+        "email": "kyle@pericak.com",
+        "url": "https://kyle.pericak.com"
+      },
+      "keywords": [
+        "stellaris",
+        "paradox",
+        "modding",
+        "game-dev",
+        "clausewitz"
+      ],
+      "category": "tools"
     }
   ]
 }

@@ -22,6 +22,10 @@ Refresh after I push: `/plugin marketplace update pai-plugins`.
 - **ingesting-external-research**: validate claims, ADOPT/ADAPT/SKIP triage with self-review
 - **auditing-for-confidential-data**: pre-publish content audit (auth'd-data leaks, OWASP LLM 01/05/06)
 
+## game-dev-tools
+
+- **create-stellaris-mod**: build-from-vanilla / regex-transform / symlink-deploy / preflight workflow for Stellaris gameplay mods, with the bug-museum (sentinel separation, real-PNG thumbnails, BOM, launcher cache) baked in
+
 ## pai-tools
 
 - **openrouter-usage**: OpenRouter API spend, credit balance, model pricing

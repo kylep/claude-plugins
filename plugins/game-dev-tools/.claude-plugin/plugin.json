@@ -1,0 +1,20 @@
+{
+  "name": "game-dev-tools",
+  "description": "Skills for building moddable-game mods. Currently: Stellaris (Paradox / Clausewitz engine). Codifies the build-from-vanilla + symlink-deploy + preflight pattern from two shipped Workshop mods.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Kyle Pericak",
+    "email": "kyle@pericak.com",
+    "url": "https://kyle.pericak.com"
+  },
+  "homepage": "https://github.com/kylep/claude-plugins/tree/main/plugins/game-dev-tools",
+  "repository": "https://github.com/kylep/claude-plugins",
+  "license": "MIT",
+  "keywords": [
+    "stellaris",
+    "paradox",
+    "modding",
+    "game-dev",
+    "clausewitz"
+  ]
+}
