@@ -1,0 +1,9 @@
+# Dev/test dependencies for the pai-tools test suites.
+#
+# The scripts themselves are stdlib-only for HTTP (urllib); pytest is all that
+# unit + integration need. The google libraries that ga4.py/gsc.py use are
+# imported lazily *inside* their command functions, so integration mocks them
+# via sys.modules injection and they are NOT required here. Install them only
+# if you want to run the ga4/gsc contract tests against live Google APIs:
+#   pip install google-analytics-data google-api-python-client google-auth-oauthlib
+pytest>=8,<10

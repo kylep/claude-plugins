@@ -41,10 +41,13 @@ API: openrouter, linear, discord, google_news, ga4, gsc, openobserve.
 - `pytest.ini` sets `addopts = -m "not contract"` so a bare `pytest` runs only
   unit + integration and never touches a live API by accident. Run contract
   explicitly with `pytest -m contract`.
-- `requirements-dev.txt` pins: `pytest`, `google-analytics-data`,
-  `google-api-python-client`, `google-auth-oauthlib`. The google libs are
-  installed so `ga4.py`/`gsc.py` can be **imported and mocked** in integration
-  and CI. Real google **credentials** are required only for contract tests.
+- `requirements-dev.txt` pins only `pytest`. **As-built refinement:** `ga4.py`
+  and `gsc.py` import the google libraries lazily *inside* their command
+  functions, so the modules import fine without those libs. Integration therefore
+  mocks the google libs via `sys.modules` injection and they are **not** a dev
+  dependency (lighter than the original "install google libs" plan). The libs are
+  needed only to run the ga4/gsc **contract** tests against live Google APIs,
+  which auto-skip otherwise.
 
 ### Importing the scripts
 
