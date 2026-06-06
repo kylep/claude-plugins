@@ -1,6 +1,6 @@
 {
   "name": "pai-tools",
-  "description": "SDK-wrapper skills: query OpenRouter, Google News, Bitwarden CLI, and macOS desktop from Claude via small Python scripts. Stdlib-only, no build step.",
+  "description": "SDK-wrapper skills bundled with small Python scripts: query OpenRouter and Claude Code usage, Linear, Discord, Google News, GA4, Google Search Console, OpenObserve, Bitwarden CLI, and macOS desktop from Claude. Stdlib-only for HTTP (GA4/GSC need Google client libs); no build step.",
   "version": "0.1.0",
   "author": {
     "name": "Kyle Pericak",
@@ -12,7 +12,13 @@
   "license": "MIT",
   "keywords": [
     "openrouter",
+    "cc-usage",
+    "linear",
+    "discord",
     "google-news",
+    "ga4",
+    "google-search-console",
+    "openobserve",
     "bitwarden",
     "macos",
     "screenshot",
