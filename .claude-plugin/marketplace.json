@@ -30,7 +30,7 @@
     {
       "name": "pai-tools",
       "source": "./plugins/pai-tools",
-      "description": "SDK-wrapper skills bundled with Python scripts: OpenRouter usage, Google News, Bitwarden CLI, macOS desktop control",
+      "description": "SDK-wrapper skills bundled with Python scripts: OpenRouter and Claude Code usage, Linear, Discord, Google News, GA4, Google Search Console, OpenObserve, Bitwarden CLI, and macOS desktop control",
       "version": "0.1.0",
       "author": {
         "name": "Kyle Pericak",
@@ -39,7 +39,13 @@
       },
       "keywords": [
         "openrouter",
+        "cc-usage",
+        "linear",
+        "discord",
         "google-news",
+        "ga4",
+        "google-search-console",
+        "openobserve",
         "bitwarden",
         "macos",
         "screenshot",
