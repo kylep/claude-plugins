@@ -1,7 +1,7 @@
 {
   "name": "kytrade",
-  "description": "Operate kytrade, Kyle's personal trading toolkit: bootstrap and health-check the stack, pull daily stock prices, manage S&P 500 membership, and answer market questions (performance, comparisons, movers, sectors, 52-week screeners, volatility) from its Postgres document store via the kt CLI or FastAPI ingress.",
-  "version": "0.1.0",
+  "description": "Operate kytrade, Kyle's personal trading toolkit: bootstrap and health-check the stack, pull daily stock prices, manage S&P 500 and TSX 60 membership, track ETFs (SPY, QQQ, XIU.TO), and answer market questions (performance, comparisons, movers, sectors, 52-week screeners, volatility) from its Postgres document store via the kt CLI or FastAPI ingress.",
+  "version": "0.2.0",
   "author": {
     "name": "Kyle Pericak",
     "email": "kyle@pericak.com",
@@ -17,6 +17,7 @@
     "sp500",
     "yfinance",
     "analysis",
-    "cli-wrapper"
+    "cli-wrapper",
+    "tsx60"
   ]
 }

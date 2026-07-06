@@ -9,8 +9,9 @@ prompt-first: its `PROMPTS.md` lists the prompts these skills serve.
 
 - **operating-kytrade**: bootstrap from scratch (including `.env`
   secret generation), health/staleness checks, incremental price
-  pulls, S&P 500 membership reconciliation, cost/safety rails
-  (~503-request refreshes, `--full` re-downloads, never the k8s DB)
+  pulls, S&P 500 + TSX 60 membership reconciliation, ETF tracking
+  (SPY, QQQ, XIU.TO), cost/safety rails (~565-request refreshes,
+  `--full` re-downloads, never the k8s DB)
 - **analyzing-market-data**: answer market questions from stored
   data — window performance, multi-symbol comparisons, gainers/losers,
   sector performance, 52-week high/low screening, volatility — with

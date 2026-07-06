@@ -7,7 +7,10 @@ description: Use when asked market questions answerable from kytrade's stored pr
 
 Answer market questions from Kyle's own price database (Postgres
 document store, daily OHLCV back to each listing's start, auto-adjusted
-closes rounded to 4 decimals). Run from `apps/kytrade/` with
+closes rounded to 4 decimals). Universe: S&P 500 (USD) + S&P/TSX 60
+(CAD, `.TO` tickers) + tracked ETFs (SPY, QQQ, XIU.TO). Returns are
+percentages, so cross-currency comparisons stay meaningful; flag the
+currency if absolute prices are quoted. Run from `apps/kytrade/` with
 `uv run kt ... --json`.
 
 ## Recipes
@@ -29,7 +32,7 @@ recent stored trading day. Returns are percentages over the window
 
 1. `uv run kt status --json` — if staleness shows the relevant symbols
    weren't pulled today, say so in the answer or `kt refresh` first
-   (refresh = ~503 network calls; for one or two symbols prefer
+   (refresh = ~565 network calls; for one or two symbols prefer
    `kt data pull -s X`).
 2. A `NotEnoughData` error (exit 1) means the symbol has no/too-little
    stored history — pull it, don't guess.

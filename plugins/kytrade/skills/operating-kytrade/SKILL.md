@@ -1,6 +1,6 @@
 ---
 name: operating-kytrade
-description: Use when asked to set up, health-check, refresh, or pull data into kytrade (Kyle's trading toolkit) — bootstrap from scratch, manage the postgres container and .env secrets, pull stock price history, or reconcile S&P 500 membership.
+description: Use when asked to set up, health-check, refresh, or pull data into kytrade (Kyle's trading toolkit) — bootstrap from scratch, manage the postgres container and .env secrets, pull stock price history, reconcile S&P 500 / TSX 60 index membership, or track ETFs like XIU.
 ---
 
 # Operating kytrade
@@ -38,8 +38,8 @@ uv run kt status --json
 docker compose up -d postgres --wait   # after ensuring .env exists, or:
 uv run kt bootstrap --json             # generates .env if needed
 docker compose up -d postgres --wait   # now compose can read .env
-uv run kt bootstrap --json             # idempotent: tables + S&P 500 membership
-uv run kt refresh --json               # pull all price history (~503 symbols, minutes)
+uv run kt bootstrap --json             # idempotent: tables + S&P 500 + TSX 60 + house ETFs
+uv run kt refresh --json               # pull all price history (~565 symbols, minutes)
 ```
 
 Bootstrap loads membership live from Wikipedia and falls back to the
@@ -54,7 +54,8 @@ uv run kt data pull -s AAPL --json        # one symbol, incremental
 uv run kt data pull -s AAPL --full        # re-download (adjusted-price drift)
 uv run kt data prices AAPL --tail 30 --json
 uv run kt data symbols --json             # ticker → metadata
-uv run kt data load-sp500 --json          # reconcile membership, returns joins/leaves
+uv run kt data load-index all --json      # reconcile index membership, returns joins/leaves
+uv run kt data track-etf XIU.TO --currency CAD   # track an ETF's prices like any symbol
 uv run kt data membership-log --json      # dated joins/leaves from past loads
 ```
 
@@ -63,8 +64,8 @@ second pull returning 0 new days is correct behavior, not a bug.
 
 ## Cost and safety awareness
 
-- `kt refresh`, `kt data pull --all`, `kt data backfill-sp500` make
-  ~503 Yahoo Finance requests: minutes of wall time, rate-limit
+- `kt refresh`, `kt data pull --all`, `kt data backfill` make
+  ~565 Yahoo Finance requests: minutes of wall time, rate-limit
   sensitive. Don't run them casually or in loops.
 - `--full` re-downloads everything. Warranted occasionally because
   auto-adjusted history drifts after splits/dividends; not per-pull.
@@ -74,9 +75,10 @@ second pull returning 0 new days is correct behavior, not a bug.
 
 ## Troubleshooting
 
-- Wikipedia 403 on load-sp500: fetches use a real User-Agent; if it
-  still fails, `--file raw-data/indexes/spy-oct17-2022.xlsx`.
-- Yahoo returning empty history: check the ticker uses dashes for
-  class shares (`BRK-B`, not `BRK.B`).
+- Wikipedia 403 on load-index: fetches use a real User-Agent; if it
+  still fails, `kt data load-index sp500 --file raw-data/indexes/spy-oct17-2022.xlsx`.
+- Yahoo returning empty history: class shares use dashes (`BRK-B`,
+  not `BRK.B`) and Toronto listings need the `.TO` suffix
+  (`RY.TO`, `CTC-A.TO`) — membership loading normalizes both.
 - Tests: `uv run pytest` (unit, no DB); `bin/integration-test.sh`
   (real postgres). Both must pass before committing changes.

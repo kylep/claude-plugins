@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "pai-plugins",
-  "description": "Pericak AI — Kyle Pericak's public plugin marketplace for Claude Code",
+  "description": "Pericak AI \u2014 Kyle Pericak's public plugin marketplace for Claude Code",
   "owner": {
     "name": "Kyle Pericak",
     "email": "kyle@pericak.com"
@@ -10,8 +10,8 @@
     {
       "name": "kytrade",
       "source": "./plugins/kytrade",
-      "description": "Operate and query kytrade, Kyle's personal trading toolkit: bootstrap, health checks, price pulls, S&P 500 membership, and market analysis via the kt CLI",
-      "version": "0.1.0",
+      "description": "Operate and query kytrade, Kyle's personal trading toolkit: bootstrap, health checks, price pulls, S&P 500 + TSX 60 membership, ETF tracking (SPY, QQQ, XIU.TO), and market analysis via the kt CLI",
+      "version": "0.2.0",
       "author": {
         "name": "Kyle Pericak",
         "email": "kyle@pericak.com",
@@ -22,7 +22,8 @@
         "stocks",
         "market-data",
         "sp500",
-        "analysis"
+        "analysis",
+        "tsx60"
       ],
       "category": "tools"
     },
