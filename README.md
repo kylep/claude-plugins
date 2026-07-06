@@ -8,6 +8,7 @@ Pericak AI — public marketplace of Claude Code plugins by [Kyle Pericak](https
 /plugin marketplace add kylep/claude-plugins
 /plugin install pai-workflows@pai-plugins
 /plugin install pai-tools@pai-plugins
+/plugin install kytrade@pai-plugins
 ```
 
 Refresh after I push: `/plugin marketplace update pai-plugins`.
@@ -25,6 +26,11 @@ Refresh after I push: `/plugin marketplace update pai-plugins`.
 ## game-dev-tools
 
 - **create-stellaris-mod**: build-from-vanilla / regex-transform / symlink-deploy / preflight workflow for Stellaris gameplay mods, with the bug-museum (sentinel separation, real-PNG thumbnails, BOM, launcher cache) baked in
+
+## kytrade
+
+- **operating-kytrade**: bootstrap, health/staleness checks, incremental price pulls, S&P 500 membership reconciliation for the [kytrade toolkit](https://github.com/kylep/multi/tree/main/apps/kytrade)
+- **analyzing-market-data**: market questions from kytrade's stored data — performance, comparisons, movers, sectors, 52-week screeners, volatility
 
 ## pai-tools
 

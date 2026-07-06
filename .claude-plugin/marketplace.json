@@ -8,6 +8,25 @@
   },
   "plugins": [
     {
+      "name": "kytrade",
+      "source": "./plugins/kytrade",
+      "description": "Operate and query kytrade, Kyle's personal trading toolkit: bootstrap, health checks, price pulls, S&P 500 membership, and market analysis via the kt CLI",
+      "version": "0.1.0",
+      "author": {
+        "name": "Kyle Pericak",
+        "email": "kyle@pericak.com",
+        "url": "https://kyle.pericak.com"
+      },
+      "keywords": [
+        "trading",
+        "stocks",
+        "market-data",
+        "sp500",
+        "analysis"
+      ],
+      "category": "tools"
+    },
+    {
       "name": "pai-workflows",
       "source": "./plugins/pai-workflows",
       "description": "Interview-driven PRDs and design docs, research synthesis, grounded retrieval answers, and pre-publish content audits",
