@@ -1,7 +1,7 @@
 {
   "name": "pai-workflows",
-  "description": "Interview-driven PRDs and design docs, research synthesis, grounded retrieval answers, and pre-publish content audits. Workflow skills extracted from kyle.pericak.com's blog agent system.",
-  "version": "0.1.0",
+  "description": "Interview-driven PRDs and design docs, research synthesis, grounded retrieval answers, and pre-publish content audits. Workflow skills extracted from kyle.pericak.com's blog agent system; context-compaction command authoring.",
+  "version": "0.2.0",
   "author": {
     "name": "Kyle Pericak",
     "email": "kyle@pericak.com",
@@ -17,6 +17,7 @@
     "synthesis",
     "interview",
     "grounded-retrieval",
-    "security-audit"
+    "security-audit",
+    "compact"
   ]
 }
