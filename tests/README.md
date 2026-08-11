@@ -31,7 +31,7 @@ with `-m contract`, and each test auto-skips unless its credentials are present.
 |---|---|:--:|:--:|:--:|
 | `openrouter.py` | get-usage, get-model-pricing | ✓ | ✓ | ✓ (read-only) |
 | `linear.py` | list/get/create/update-issue, add/list-comments, list-teams/projects | ✓ | ✓ | ✓ (read + create/cleanup) |
-| `strava.py` | athlete(-zones/-stats/-clubs/-routes), activities, activity(-comments/-kudos/-laps/-zones/-streams), club(-activities/-members/-admins), gear, route(-export/-streams), segment(s-starred/-explore/-streams), segment-effort(s/-streams), upload | ✓ | ✓ | ✓ (read-only, auto-skip) |
+| `strava.py` | auth, athlete(-zones/-stats/-clubs/-routes), activities, activity(-comments/-kudos/-laps/-zones/-streams), club(-activities/-members/-admins), gear, route(-export/-streams), segment(s-starred/-explore/-streams), segment-effort(s/-streams), upload | ✓ | ✓ | ✓ (read-only, auto-skip) |
 | `discord.py` | list-guilds/channels, get-channel-info, send/read/reply/edit/delete-message, add-reaction, create/list-threads, search-messages, send-embed | ✓ | ✓ | ✓ (read + send/delete) |
 | `google_news.py` | search, headlines | ✓ | ✓ | ✓ (read-only) |
 | `ga4.py` | run-report, realtime | ✓ | ✓ | ✓ (read-only, auto-skip) |

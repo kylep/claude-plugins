@@ -34,6 +34,8 @@ export STRAVA_REFRESH_TOKEN="..."      # seed refresh token
 # export STRAVA_TOKEN_PATH="$HOME/.strava_token.json"
 ```
 
+Don't have tokens yet, or need to add a scope (e.g. `activity:read_all` to read activities)? Run `auth` to mint them — it prints an authorize URL, and `auth --code <code>` exchanges the redirect's code for tokens. **Refreshing never changes scopes**, so to widen access you must re-run `auth` with the broader scope and use the *new* refresh token.
+
 **Token refresh is automatic.** Access tokens live ~6h and Strava **rotates the refresh token on every refresh** (the old one dies immediately). The script persists refreshed tokens to a `0600` cache file (default: `.strava_token.json` next to the script, gitignored). After the first refresh, that file — not your env vars — is the source of truth. Don't commit it.
 
 ## Invoke
@@ -56,6 +58,11 @@ python3 "${CLAUDE_PLUGIN_ROOT}/skills/strava/scripts/strava.py" \
 Add `--json` to **any** subcommand to get the raw API JSON instead of the human summary — the right choice when you need to parse fields programmatically.
 
 ## Subcommands
+
+Auth (one-time, only if you need to (re)authorize or add a scope):
+- `auth` — print the authorize URL (default scope `read,activity:read_all,profile:read_all`)
+- `auth --code CODE` — exchange the code from the redirect for tokens, write them to the cache, and print the values to persist in `exports.sh`
+- `auth [--scope ...] [--redirect-uri ...]` — customize requested scopes / callback
 
 Athlete:
 - `athlete` — authenticated athlete profile

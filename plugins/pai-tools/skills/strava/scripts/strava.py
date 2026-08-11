@@ -42,6 +42,8 @@ from urllib.request import Request, urlopen
 
 BASE_URL = "https://www.strava.com/api/v3"
 TOKEN_URL = "https://www.strava.com/oauth/token"
+AUTHORIZE_URL = "https://www.strava.com/oauth/authorize"
+DEFAULT_SCOPE = "read,activity:read_all,profile:read_all"
 SCRIPT_DIR = Path(__file__).parent
 EXPIRY_BUFFER = 60  # refresh this many seconds before actual expiry
 
@@ -156,6 +158,56 @@ def get_access_token(force_refresh: bool = False) -> str:
     if force_refresh or is_token_expired(cache.get("expires_at", 0)):
         cache = refresh_tokens(cache["refresh_token"])
     return cache["access_token"]
+
+
+# ---------------------------------------------------------------------------
+# One-time OAuth (authorize URL + code exchange)
+# ---------------------------------------------------------------------------
+
+
+def build_authorize_url(scope: str, redirect_uri: str) -> str:
+    params = {
+        "client_id": require_env("STRAVA_CLIENT_ID"),
+        "response_type": "code",
+        "redirect_uri": redirect_uri,
+        "approval_prompt": "force",
+        "scope": scope,
+    }
+    return f"{AUTHORIZE_URL}?{urlencode(params)}"
+
+
+def exchange_code(code: str) -> dict:
+    """Exchange an authorization code for tokens and persist them to the cache."""
+    body = urlencode(
+        {
+            "client_id": require_env("STRAVA_CLIENT_ID"),
+            "client_secret": require_env("STRAVA_CLIENT_SECRET"),
+            "code": code,
+            "grant_type": "authorization_code",
+        }
+    ).encode("utf-8")
+    req = Request(
+        TOKEN_URL,
+        data=body,
+        method="POST",
+        headers={"Content-Type": "application/x-www-form-urlencoded"},
+    )
+    try:
+        with urlopen(req, timeout=30) as resp:
+            payload = json.loads(resp.read().decode("utf-8"))
+    except HTTPError as e:
+        sys.exit(
+            f"Strava token exchange failed (HTTP {e.code}): "
+            f"{e.read().decode('utf-8', errors='replace')}"
+        )
+    save_token_cache(
+        {
+            "access_token": payload["access_token"],
+            "refresh_token": payload["refresh_token"],
+            "expires_at": payload["expires_at"],
+        }
+    )
+    return payload
 
 
 # ---------------------------------------------------------------------------
@@ -300,6 +352,42 @@ def stream_summary(data) -> list[str]:
 
 def emit_json(data) -> None:
     print(json.dumps(data, indent=2))
+
+
+# ---------------------------------------------------------------------------
+# Auth command
+# ---------------------------------------------------------------------------
+
+
+def cmd_auth(args) -> None:
+    if not args.code:
+        url = build_authorize_url(args.scope, args.redirect_uri)
+        print("1. Open this URL and click Authorize (leave every requested scope checked):\n")
+        print(url)
+        print(
+            "\n2. Your browser redirects to your callback. It may show a 404 or "
+            "'can't connect' — that is fine. Copy the `code` value out of the "
+            "address-bar URL:  ...?state=&code=THIS_PART&scope=...\n"
+        )
+        print("3. Re-run:  strava.py auth --code THAT_CODE\n")
+        print(
+            "If the redirect is rejected outright (not a 404), your app's "
+            "'Authorization Callback Domain' does not match the redirect host — set "
+            f"it to match '{args.redirect_uri}' (default 'localhost') in the Strava "
+            "app settings, then retry."
+        )
+        return
+    payload = exchange_code(args.code)
+    if args.json:
+        return emit_json(payload)
+    athlete = payload.get("athlete") or {}
+    who = f"{athlete.get('firstname', '')} {athlete.get('lastname', '')}".strip()
+    print("Authorized. Tokens written to the cache — the CLI works now.")
+    if who or athlete.get("id"):
+        print(f"Athlete: {who or '—'} (id: {athlete.get('id')})")
+    print("\nPersist these in exports.sh so a cache wipe doesn't lose them:")
+    print(f'  export STRAVA_ACCESS_TOKEN="{payload["access_token"]}"')
+    print(f'  export STRAVA_REFRESH_TOKEN="{payload["refresh_token"]}"')
 
 
 # ---------------------------------------------------------------------------
@@ -756,6 +844,18 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="strava.py", description="Strava read-only CLI.")
     sub = parser.add_subparsers(dest="command", required=True)
 
+    p = sub.add_parser(
+        "auth",
+        parents=[parent],
+        help="One-time OAuth: print the authorize URL, or exchange a code for tokens.",
+    )
+    p.add_argument("--code", help="Authorization code from the redirect URL.")
+    p.add_argument("--scope", default=DEFAULT_SCOPE, help="Comma-separated scopes to request.")
+    p.add_argument(
+        "--redirect-uri", default="http://localhost", dest="redirect_uri",
+        help="Must match your app's Authorization Callback Domain (default localhost).",
+    )
+
     sub.add_parser("athlete", parents=[parent], help="Authenticated athlete profile.")
     sub.add_parser("athlete-zones", parents=[parent], help="HR/power zones.")
 
@@ -866,6 +966,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 DISPATCH = {
+    "auth": cmd_auth,
     "athlete": cmd_athlete,
     "athlete-zones": cmd_athlete_zones,
     "athlete-stats": cmd_athlete_stats,

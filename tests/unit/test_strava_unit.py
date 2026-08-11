@@ -152,6 +152,16 @@ def test_stream_summary_empty():
 # ---------------------------------------------------------------------------
 
 
+def test_build_authorize_url(monkeypatch):
+    monkeypatch.setenv("STRAVA_CLIENT_ID", "271296")
+    url = mod.build_authorize_url("read,activity:read_all", "http://localhost")
+    assert url.startswith(mod.AUTHORIZE_URL + "?")
+    assert "client_id=271296" in url
+    assert "response_type=code" in url
+    assert "scope=read%2Cactivity%3Aread_all" in url
+    assert "redirect_uri=http%3A%2F%2Flocalhost" in url
+
+
 def test_every_subcommand_has_a_handler():
     parser = mod.build_parser()
     # Pull the registered subcommand names from the subparsers action.

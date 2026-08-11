@@ -146,6 +146,59 @@ def test_missing_env_exits_before_network(monkeypatch, env_and_cache):
 
 
 # ---------------------------------------------------------------------------
+# auth
+# ---------------------------------------------------------------------------
+
+
+def test_auth_prints_url_no_network(monkeypatch, capsys):
+    # No code -> just prints the authorize URL, makes no HTTP call.
+    fake = patch_urlopen(monkeypatch, mod, lambda req: {})
+    run_cli(mod, ["auth"], monkeypatch)
+    out = capsys.readouterr().out
+    assert mod.AUTHORIZE_URL in out
+    assert "client_id=271296" in out
+    assert "activity%3Aread_all" in out       # default scope requested
+    assert len(fake.calls) == 0                # no exchange happened
+
+
+def test_auth_exchange_writes_cache(monkeypatch, capsys, env_and_cache):
+    exchange_payload = {
+        "access_token": "exch-access",
+        "refresh_token": "exch-refresh",
+        "expires_at": 9999999999,
+        "athlete": {"id": 44423638, "firstname": "Kyle", "lastname": "P"},
+    }
+    fake = patch_urlopen(monkeypatch, mod, [exchange_payload])
+    run_cli(mod, ["auth", "--code", "ABC123"], monkeypatch)
+
+    out = capsys.readouterr().out
+    assert "Authorized." in out
+    assert "Kyle P" in out
+    assert 'STRAVA_ACCESS_TOKEN="exch-access"' in out
+    assert 'STRAVA_REFRESH_TOKEN="exch-refresh"' in out
+
+    # It POSTed an authorization_code grant with our code.
+    req = fake.last_request
+    assert req.method == "POST"
+    assert req.full_url == mod.TOKEN_URL
+    body = parse_qs(req.data.decode("utf-8"))
+    assert body["grant_type"] == ["authorization_code"]
+    assert body["code"] == ["ABC123"]
+
+    # Tokens were persisted to the cache.
+    saved = json.loads(env_and_cache.read_text())
+    assert saved["access_token"] == "exch-access"
+    assert saved["refresh_token"] == "exch-refresh"
+
+
+def test_auth_exchange_json(monkeypatch, capsys):
+    payload = {"access_token": "a", "refresh_token": "r", "expires_at": 1, "athlete": {"id": 1}}
+    patch_urlopen(monkeypatch, mod, [payload])
+    run_cli(mod, ["auth", "--code", "X", "--json"], monkeypatch)
+    assert json.loads(capsys.readouterr().out) == payload
+
+
+# ---------------------------------------------------------------------------
 # Athlete
 # ---------------------------------------------------------------------------
 
