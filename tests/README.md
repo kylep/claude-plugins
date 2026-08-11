@@ -31,6 +31,7 @@ with `-m contract`, and each test auto-skips unless its credentials are present.
 |---|---|:--:|:--:|:--:|
 | `openrouter.py` | get-usage, get-model-pricing | ✓ | ✓ | ✓ (read-only) |
 | `linear.py` | list/get/create/update-issue, add/list-comments, list-teams/projects | ✓ | ✓ | ✓ (read + create/cleanup) |
+| `strava.py` | athlete(-zones/-stats/-clubs/-routes), activities, activity(-comments/-kudos/-laps/-zones/-streams), club(-activities/-members/-admins), gear, route(-export/-streams), segment(s-starred/-explore/-streams), segment-effort(s/-streams), upload | ✓ | ✓ | ✓ (read-only, auto-skip) |
 | `discord.py` | list-guilds/channels, get-channel-info, send/read/reply/edit/delete-message, add-reaction, create/list-threads, search-messages, send-embed | ✓ | ✓ | ✓ (read + send/delete) |
 | `google_news.py` | search, headlines | ✓ | ✓ | ✓ (read-only) |
 | `ga4.py` | run-report, realtime | ✓ | ✓ | ✓ (read-only, auto-skip) |
@@ -54,6 +55,7 @@ target so writes never land on a real resource.
 | `openrouter.py` | `OPENROUTER_API_KEY` | — |
 | `google_news.py` | `GNEWS_API_KEY` | — |
 | `linear.py` | `LINEAR_API_KEY` | `LINEAR_TEST_TEAM` (a disposable team name/key) |
+| `strava.py` | `STRAVA_CLIENT_ID`, `STRAVA_CLIENT_SECRET`, `STRAVA_REFRESH_TOKEN` | — (read-only) |
 | `discord.py` | `DISCORD_BOT_TOKEN` (+ `DISCORD_GUILD_ID` for list-channels) | `DISCORD_TEST_CHANNEL_ID` (a throwaway channel) |
 | `openobserve.py` | `O2_URL`, `O2_TOKEN`, `O2_ORG` | — |
 | `ga4.py` | `GA4_PROPERTY_ID`, `GOOGLE_APPLICATION_CREDENTIALS` + `google-analytics-data` installed | — |

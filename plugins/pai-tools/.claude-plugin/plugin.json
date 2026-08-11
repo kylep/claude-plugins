@@ -1,7 +1,7 @@
 {
   "name": "pai-tools",
-  "description": "SDK-wrapper skills bundled with small Python scripts: query OpenRouter and Claude Code usage, Linear, Discord, Google News, GA4, Google Search Console, OpenObserve, Bitwarden CLI, and macOS desktop from Claude. Stdlib-only for HTTP (GA4/GSC need Google client libs); no build step.",
-  "version": "0.1.0",
+  "description": "SDK-wrapper skills bundled with small Python scripts: query OpenRouter and Claude Code usage, Linear, Discord, Google News, GA4, Google Search Console, OpenObserve, Bitwarden CLI, Strava, and macOS desktop from Claude. Stdlib-only for HTTP (GA4/GSC need Google client libs); no build step.",
+  "version": "0.2.0",
   "author": {
     "name": "Kyle Pericak",
     "email": "kyle@pericak.com",
@@ -20,6 +20,7 @@
     "google-search-console",
     "openobserve",
     "bitwarden",
+    "strava",
     "macos",
     "screenshot",
     "sdk-wrapper"

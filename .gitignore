@@ -22,3 +22,4 @@ __pycache__/
 *.token
 client_secrets.json
 token.json
+.strava_token.json

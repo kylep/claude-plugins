@@ -32,6 +32,7 @@ SCRIPTS = {
     "cc_usage": "cc-usage/scripts/cc_usage.py",
     "bitwarden": "bitwarden-vault/scripts/bitwarden.py",
     "desktop": "macos-desktop-control/scripts/desktop.py",
+    "strava": "strava/scripts/strava.py",
 }
 
 _module_cache: dict[str, object] = {}

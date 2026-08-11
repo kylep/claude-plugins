@@ -20,6 +20,7 @@ SDK-wrapper skills with bundled Python scripts. Each script is a single-file CLI
 - **google-search-console**: search analytics, URL inspection, sitemap management (OAuth)
 - **ga4-analytics**: Google Analytics 4 historical and realtime reports (service account)
 - **linear**: Linear GraphQL — list/get/create/update issues, comments, teams, projects
+- **strava**: Strava API v3 (read-only) — athlete/activities/clubs/gear/routes/segments/streams, auto-refreshing OAuth
 - **cc-usage**: Claude Code spend and tokens from local session logs, with LiteLLM pricing
 
 ## Layout
