@@ -1,3 +1,8 @@
+# secrets
+exports.sh
+exports.sh.swp
+exports.sh*
+
 # Python
 __pycache__/
 *.py[cod]
