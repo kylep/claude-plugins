@@ -17,22 +17,24 @@ from urllib.error import HTTPError
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-SKILLS = REPO_ROOT / "plugins" / "pai-tools" / "skills"
+PLUGINS = REPO_ROOT / "plugins"
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
 
-# Logical name -> path of each script under test.
+# Logical name -> path of each script under test, relative to plugins/.
+_PT = "pai-tools/skills/"
 SCRIPTS = {
-    "openrouter": "openrouter-usage/scripts/openrouter.py",
-    "linear": "linear/scripts/linear.py",
-    "discord": "discord/scripts/discord.py",
-    "google_news": "google-news/scripts/google_news.py",
-    "ga4": "ga4-analytics/scripts/ga4.py",
-    "gsc": "google-search-console/scripts/gsc.py",
-    "openobserve": "openobserve/scripts/openobserve.py",
-    "cc_usage": "cc-usage/scripts/cc_usage.py",
-    "bitwarden": "bitwarden-vault/scripts/bitwarden.py",
-    "desktop": "macos-desktop-control/scripts/desktop.py",
-    "strava": "strava/scripts/strava.py",
+    "openrouter": _PT + "openrouter-usage/scripts/openrouter.py",
+    "linear": _PT + "linear/scripts/linear.py",
+    "discord": _PT + "discord/scripts/discord.py",
+    "google_news": _PT + "google-news/scripts/google_news.py",
+    "ga4": _PT + "ga4-analytics/scripts/ga4.py",
+    "gsc": _PT + "google-search-console/scripts/gsc.py",
+    "openobserve": _PT + "openobserve/scripts/openobserve.py",
+    "cc_usage": _PT + "cc-usage/scripts/cc_usage.py",
+    "bitwarden": _PT + "bitwarden-vault/scripts/bitwarden.py",
+    "desktop": _PT + "macos-desktop-control/scripts/desktop.py",
+    "strava": _PT + "strava/scripts/strava.py",
+    "peloton_adb": "peloton/skills/sideloading-peloton-apps/scripts/peloton_adb.py",
 }
 
 _module_cache: dict[str, object] = {}
@@ -42,7 +44,7 @@ def load_script(name: str):
     """Import a script by logical name and return the module object (cached)."""
     if name in _module_cache:
         return _module_cache[name]
-    path = SKILLS / SCRIPTS[name]
+    path = PLUGINS / SCRIPTS[name]
     spec = importlib.util.spec_from_file_location(f"paitool_{name}", path)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)

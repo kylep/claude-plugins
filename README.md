@@ -9,6 +9,7 @@ Pericak AI — public marketplace of Claude Code plugins by [Kyle Pericak](https
 /plugin install pai-workflows@pai-plugins
 /plugin install pai-tools@pai-plugins
 /plugin install kytrade@pai-plugins
+/plugin install peloton@pai-plugins
 ```
 
 Refresh after I push: `/plugin marketplace update pai-plugins`.
@@ -31,6 +32,10 @@ Refresh after I push: `/plugin marketplace update pai-plugins`.
 
 - **operating-kytrade**: bootstrap, health/staleness checks, incremental price pulls, S&P 500 membership reconciliation for the [kytrade toolkit](https://github.com/kylep/multi/tree/main/apps/kytrade)
 - **analyzing-market-data**: market questions from kytrade's stored data — performance, comparisons, movers, sectors, 52-week screeners, volatility
+
+## peloton
+
+- **sideloading-peloton-apps**: wireless-ADB sideloading on a Peloton tablet (connect, launcher, Aurora Store, APK install) plus `diagnose`/`unblock` for the post-reboot membership gate that force-stops third-party apps
 
 ## pai-tools
 

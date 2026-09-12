@@ -1,0 +1,22 @@
+{
+  "name": "peloton",
+  "description": "Skills for working with a Peloton bike/tread tablet as an Android device: wireless-ADB sideloading (launcher, Aurora Store, Netflix and friends), diagnosing the post-reboot 'must be logged in to a Peloton membership' kill, and reversibly disabling the membership gate.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Kyle Pericak",
+    "email": "kyle@pericak.com",
+    "url": "https://kyle.pericak.com"
+  },
+  "homepage": "https://github.com/kylep/claude-plugins/tree/main/plugins/peloton",
+  "repository": "https://github.com/kylep/claude-plugins",
+  "license": "MIT",
+  "keywords": [
+    "peloton",
+    "android",
+    "adb",
+    "sideload",
+    "wireless-debugging",
+    "netflix",
+    "aurora-store"
+  ]
+}

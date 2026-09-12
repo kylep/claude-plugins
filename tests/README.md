@@ -1,6 +1,6 @@
 # pai-tools test suites
 
-Three pytest suites cover the scripts under `plugins/pai-tools/skills/*/scripts/`.
+Three pytest suites cover the scripts under `plugins/*/skills/*/scripts/` (pai-tools and peloton).
 Markdown (`SKILL.md`, READMEs) is documentation and is not tested.
 
 | Suite | Marker | Network | API keys | What it proves |
@@ -40,8 +40,9 @@ with `-m contract`, and each test auto-skips unless its credentials are present.
 | `cc_usage.py` | daily, monthly, total | ✓ | ✓ | — (no API; reads local files) |
 | `bitwarden.py` | status, sync, list/get/create/edit/delete-item, generate-password, list-folders | ✓ | ✓ | ✓ (read-only) |
 | `desktop.py` | take, click, double-click, type | ✓ | ✓ | — (no API; local side effects) |
+| `peloton_adb.py` | connect, stable-port, status, packages, install, launch, diagnose, unblock, reblock | ✓ | ✓ | — (no API; drives adb, fully mocked) |
 
-`cc_usage.py` and `desktop.py` have no remote API, so they have no contract suite;
+`cc_usage.py`, `desktop.py`, and `peloton_adb.py` have no remote API, so they have no contract suite;
 they are fully covered by unit + integration (temp config dirs / mocked subprocess).
 
 ## Environment variables for the contract suite
