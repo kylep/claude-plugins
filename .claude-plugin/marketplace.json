@@ -31,7 +31,7 @@
       "name": "pai-workflows",
       "source": "./plugins/pai-workflows",
       "description": "Interview-driven PRDs and design docs, research synthesis, grounded retrieval answers, and pre-publish content audits",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "author": {
         "name": "Kyle Pericak",
         "email": "kyle@pericak.com",
@@ -44,7 +44,8 @@
         "synthesis",
         "interview",
         "workflow",
-        "compact"
+        "compact",
+    "loop"
       ],
       "category": "workflow"
     },

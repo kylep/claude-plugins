@@ -18,6 +18,8 @@ Process skills for specification work, research handling, and content audits. Pu
 - **synthesizing-research**: compare/contrast multiple research reports into shared/unique/contradiction
 - **ingesting-external-research**: validate claims, ADOPT/ADAPT/SKIP triage with self-review
 - **auditing-for-confidential-data**: pre-publish content audit (auth'd-data leaks, OWASP LLM 01/05/06)
+- **writing-compact-commands**: one paste-ready `/compact` with summarizer directives plus a lean verbatim state block
+- **writing-loop-commands**: one paste-ready `/loop` that drives a plan file with a Loop protocol section to completion unattended (opus implementers, sonnet reviewers)
 
 ## License
 
