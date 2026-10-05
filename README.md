@@ -51,6 +51,10 @@ Refresh after I push: `/plugin marketplace update pai-plugins`.
 - **strava**: Strava API v3 (read-only) — athlete/activities/clubs/gear/routes/segments/streams, auto-refreshing OAuth
 - **cc-usage**: Claude Code spend and tokens from local session logs, with LiteLLM pricing
 
+## Codex skills
+
+[Codex skills](codex/README.md) are kept under `codex/skills/`, separately from the Claude plugin marketplace. Currently includes `factorio-inspect` for headless map inspection, production tracing, and verified scenario edits.
+
 ## Layout
 
 ```

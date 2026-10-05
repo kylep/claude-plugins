@@ -1,0 +1,3 @@
+interface:
+  display_name: "Factorio Inspection"
+  short_description: "Inspect maps and trace production lines headlessly"
