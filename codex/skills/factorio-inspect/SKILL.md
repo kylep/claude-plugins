@@ -57,6 +57,8 @@ Report separately:
 
 Lead with the answer and the evidence needed to assess it. Say what remains unverified without adding an unsolicited general factory critique. Keep maps and user preferences as task context rather than universal rules.
 
+For dead branches or cosmetic underground cleanup, read [the cleanup guide](references/cleanup.md) and use its read-only graph planner.
+
 ## Validation reference
 
 On macOS Steam Factorio 2.0.77, `Ribbon-AI` at `~/Library/Application Support/factorio/scenarios/Ribbon-AI` was inspected with its enabled mods. Bounds `-630 -100 -580 100`, red-science recipe, 36,000 warmup ticks and 36,000 measurement ticks yielded eight machines × 150 packs = 120/min. The upstream graph contained 24 drills, 24 furnaces and two gear assemblers plus eight science assemblers. This is a regression example, not an expected answer for other maps or future versions. Preserve `Ribbon-2026-10` as the user's original when working in this context.
