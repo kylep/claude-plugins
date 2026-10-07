@@ -90,6 +90,8 @@ local function snapshot(name)
   local s=surface()
   local out={schema=1,tick=game.tick,surface=s.name,area=cfg.area,
     active_mods=script.active_mods,map_gen_settings=s.map_gen_settings,
+    game_speed=game.speed,speed_before_inspection=storage.speed_before_inspection,
+    tick_paused=game.tick_paused,
     entities={},chunks={},forces={}}
   for c in s.get_chunks() do out.chunks[#out.chunks+1]={x=c.x,y=c.y} end
   for _, f in pairs(game.forces) do
@@ -139,6 +141,7 @@ local function step()
     snapshot_tick=nil; snapshot_json=nil
   end
   if fresh_run then
+    storage.speed_before_inspection=game.speed
     storage.started=nil; storage.start_tick=nil
     storage.targets=nil; storage.measurements=nil
     fresh_run=false

@@ -29,7 +29,7 @@ The runner uses the current user mod list and settings. Do not assume these matc
 
 ## Keep repeated runs cheap
 
-Reuse snapshots for layout and graph questions. Scope ordinary exports to the relevant chain. For a large build, perform one broad source snapshot, then use targeted diagnostic exports; reserve full factory/terrain comparisons for the clean candidate and final conversion check. Force item statistics and destination inventory counts can monitor the other sciences without exporting the entire map on every iteration, provided producer scope is established.
+Reuse snapshots for layout and graph questions. Scope ordinary exports to the relevant chain. For a large build, perform one broad source snapshot, then use targeted diagnostic exports; reserve full factory/terrain comparisons for the clean candidate and final conversion check. Force item statistics and destination inventory counts can monitor the other sciences without exporting the entire map on every iteration, provided producer scope is established. Before an expensive custom run, check the first snapshot for every required counter and its intended entity targets. Use asserted, unique source anchors when adapting an exporter; a failed string replacement can silently omit counters while the engine run still succeeds.
 
 `--tiles` can dominate export size and memory when repeated over a wide area. The Yellow roundtrip test with 320,000 terrain tiles at each snapshot took 169.28 seconds, compared with 48.86 seconds for its pre-conversion production test without tiles. These were different runs, not a controlled tile-only benchmark, but they show why full terrain exports should be reserved for static validation. Where useful, separate a terrain snapshot from an operational test rather than repeatedly serializing unchanged terrain.
 
@@ -45,7 +45,7 @@ At the run root:
 
 Under `script-output/factorio-inspect`:
 
-- `initial.json`: first inspection tick after loading and initialization.
+- `initial.json`: first inspection tick after loading and initialization. `speed_before_inspection` records `game.speed` before the exporter changes it; `game_speed` records the inspection speed. `tick_paused` reflects the current inspection state after the runner has unpaused the copy, not the original saved pause state.
 - `baseline.json`: state at the start of measurement, after warmup.
 - `measurement.json`: exact start/end ticks, completion counters, recipe-change flags, and per-tick machine status totals.
 - `final.json`: state at measurement completion or snapshot-only completion.

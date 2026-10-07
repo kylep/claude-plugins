@@ -17,6 +17,7 @@ For a request to compact a factory, read [the packing guide](packing.md) before 
 Check the installed API when adapting these calls:
 
 - Load `require('plan')` while `control.lua` is parsed. Calling `require` from a tick handler fails.
+- Quality-aware lookup in 2.0.77 uses `surface.find_entity({name=name, quality=quality}, position)`. A plain name searches normal quality and misses legendary machines; a third quality argument is invalid. For measurements, retain actual entity references or use name, quality and position together.
 - Create underground belts with `type='input'` or `'output'`. `belt_to_ground_type` is read-only. A loader's `loader_type` is writable.
 - `set_recipe` can reset an assembler's direction. Set its intended direction afterwards, then export actual fluid connections rather than assuming rotated ports.
 - Inserter direction faces its pickup side; a west-side arm feeding an assembler to the east used direction `west`. Verify `pickup_position` and `drop_position` in the engine. Loader flow direction follows different semantics.
@@ -27,7 +28,7 @@ Check the installed API when adapting these calls:
 ## Verify before replacing the playable scenario
 
 1. **Build and diagnose on disposable copies.** Assert placements, recipes, modules and directions. Keep recipe unlocks, injected stocks, drained outputs or other test-only changes explicit. Validate upstream supply and warehouse delivery separately. Do not publish an advanced throughput-test save as a fresh scenario.
-2. **Produce a clean candidate.** Apply the final edit to a fresh source copy with a snapshot-only run. Export before/after state and research. Keep test unlocks and ingredient seeding out of this build. Pausing at the first inspection tick avoids simulated production, but normal mod initialization has still run.
+2. **Produce a clean candidate.** Apply the final edit to a fresh source copy with a snapshot-only run. Export before/after state and research. Keep test unlocks and ingredient seeding out of this build. Pass `--speed 1` explicitly: the runner defaults to 64 and SIGINT saves that speed into the candidate. Assert the verification snapshot's `speed_before_inspection == 1` (or capture `game.speed` before assigning test speed in a custom exporter). Require the converted playable scenario to load at 1×. A post-assignment speed check cannot detect this leak. Record pause state separately; inspection deliberately pauses at completion. Pausing at the first inspection tick avoids simulated production, but normal mod initialization has still run.
 3. **Convert with the inspection mod disabled.** In the candidate's isolated `mods/mod-list.json`, disable only the inspection module. On this Mac, the command below reads `<run>/saves/inspection-source.zip` and writes `<run>/scenarios/inspection-source`. Use the basename without `.zip`; confirm paths in the engine log.
 
    ```sh
